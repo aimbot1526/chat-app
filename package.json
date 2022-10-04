@@ -4,12 +4,12 @@
   "description": "Video conferencing and real-time chat application.",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm start\" ",
+    "dev": "concurrently \"cd backend && nodemon app.js\" \"cd frontend && npm start\" ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "concurrently": "^7.4.0"
   }
 }

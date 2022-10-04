@@ -4,7 +4,7 @@ const port = 5000;
 
 app.get('/hello', (req, res) => {
     res.send(JSON.stringify({
-        'myhope': "New bro World"
+        'myhope': "Hello From Dashboard"
     }));
 });
 
