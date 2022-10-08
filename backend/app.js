@@ -1,15 +1,20 @@
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
+const index = require('./routes/index');
 const port = 5000;
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth2');
-const cookieSession = require('cookie-session');
+require('dotenv').config();
 
-app.get('/hello', (req, res) => {
-    res.send(JSON.stringify({
-        'myhope': "Hello From Dashboard"
-    }));
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const dbUrl = process.env.ATLAS_URL;
+mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const connection = mongoose.connection;
+connection.once('open', () => { console.log('Database connection established successfully.') });
+
+app.use('/', index);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
