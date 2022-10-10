@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const index = require('./routes/index');
+const userRoutes = require('./routes/user.routes');
 const port = 5000;
 require('dotenv').config();
 
@@ -14,7 +14,8 @@ mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 const connection = mongoose.connection;
 connection.once('open', () => { console.log('Database connection established successfully.') });
 
-app.use('/', index);
+// Routes prefix
+app.use('/auth/user', userRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
