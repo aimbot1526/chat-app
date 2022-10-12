@@ -3,20 +3,34 @@ import { useState } from "react";
 import '../assets/LoginAndSignUp.css';
 import { FaFacebook, FaGoogle, FaLinkedin } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
+import { AddUser } from "../../services/UserService";
 
 function LoginAndSignUp() {
 
+    let username = '';
+
     const [isActive, setIsActive] = useState(false);
 
+    const [messageFrom, setMessageForm] = useState({
+        name: '', email: '', password: ''
+    });
+
     const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setMessageForm({...messageFrom, [e.target.name]: e.target.value});
+    };
 
     const handleClick = (e) => {
         setIsActive(current => !current);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = async(e) => {
+        AddUser(messageFrom).then((res) => {
+            username = res;
+        });
         navigate('/hello');
+        
     }
 
     return (
@@ -31,14 +45,14 @@ function LoginAndSignUp() {
                             <a href="#" className="social"><FaLinkedin /></a>
                         </div>
                         <span>or use your email for registration</span>
-                        <input type="text" placeholder="Name" />
-                        <input type="email" placeholder="Email" />
-                        <input type="password" placeholder="Password" />
+                        <input type="text" onChange={e => handleChange(e)} name="name" placeholder="Name" />
+                        <input type="email" onChange={e => handleChange(e)} name="email" placeholder="Email" />
+                        <input type="password" onChange={e => handleChange(e)} name="password" placeholder="Password" />
                         <button type="submit" >Sign Up</button>
                     </form>
                 </div>
                 <div className="form-container sign-in-container">
-                    <form action="#">
+                    <form >
                         <h1>Sign in</h1>
                         <div className="social-container">
                             <a href="#" className="social"><FaFacebook /></a>

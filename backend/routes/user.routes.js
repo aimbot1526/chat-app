@@ -24,7 +24,7 @@ router.post('/add', (req, res) => {
                     if (err) {
                         console.log(err);
                     } else {
-                        res.send("User added Succcessfully.")
+                        res.send(userInfo.name);
                     }
                 });
             }

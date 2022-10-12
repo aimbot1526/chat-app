@@ -7,18 +7,15 @@ export default function Dashboard() {
 
     const [data, dataSet] = useState([]);
 
-    const updateState = useCallback(async () => {
-        const res = await getHello();
-        dataSet(res);
+    useEffect(() => {
+        getHello().then((data) => dataSet(data));
     }, []);
 
-    useEffect(() => {
-        setInterval(updateState, 1000);
-    }, [updateState]);
+    if (!data) return <div>Loading...</div>;
 
     return (
         <>
-            <h1>{data.myhope}</h1>
+            <h1>{data.some}</h1>
         </>
     );
 }
