@@ -7,8 +7,6 @@ import { AddUser } from "../../services/UserService";
 
 function LoginAndSignUp() {
 
-    let username = '';
-
     const [isActive, setIsActive] = useState(false);
 
     const [messageFrom, setMessageForm] = useState({
@@ -27,10 +25,8 @@ function LoginAndSignUp() {
 
     const handleSubmit = async(e) => {
         AddUser(messageFrom).then((res) => {
-            username = res;
         });
         navigate('/hello');
-        
     }
 
     return (

@@ -1,21 +1,12 @@
-import React from "react";
-import { useEffect } from "react";
-import { useCallback, useState } from "react";
-import { getHello } from "../../services/TestService";
+import React, { useState } from "react";
+import SideBar from "../Sidebar";
 
 export default function Dashboard() {
 
-    const [data, dataSet] = useState([]);
-
-    useEffect(() => {
-        getHello().then((data) => dataSet(data));
-    }, []);
-
-    if (!data) return <div>Loading...</div>;
-
     return (
         <>
-            <h1>{data.some}</h1>
+            <SideBar />
+            <h1>Welcome</h1>
         </>
     );
 }
